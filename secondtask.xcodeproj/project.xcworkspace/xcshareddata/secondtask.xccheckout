@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2D2490EE-01B8-474A-9EB2-9B6F0D7CD09C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>secondtask</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D1F4F4A6D8E99E90C07D115373AEE44A95ABF580</key>
+		<string>https://github.com/RBevilacqua/secondTask.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>secondtask.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D1F4F4A6D8E99E90C07D115373AEE44A95ABF580</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/RBevilacqua/secondTask.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D1F4F4A6D8E99E90C07D115373AEE44A95ABF580</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D1F4F4A6D8E99E90C07D115373AEE44A95ABF580</string>
+			<key>IDESourceControlWCCName</key>
+			<string>secondTask</string>
+		</dict>
+	</array>
+</dict>
+</plist>

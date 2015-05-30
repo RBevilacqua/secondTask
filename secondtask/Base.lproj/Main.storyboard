@@ -41,9 +41,13 @@
                                             <constraint firstAttribute="height" constant="75" id="2Bh-fm-mHs"/>
                                             <constraint firstAttribute="width" constant="75" id="fgu-Hb-6d8"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="Button">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="btPopular1Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="he3-xG-oh9"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7x-6I-Bqv">
                                         <rect key="frame" x="203" y="12" width="75" height="75"/>
@@ -52,9 +56,13 @@
                                             <constraint firstAttribute="height" constant="75" id="2ZQ-WQ-2j2"/>
                                             <constraint firstAttribute="width" constant="75" id="RWf-zh-g1i"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="Button">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="btPopular2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5UP-A7-tUI"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fm3-XI-RAP">
                                         <rect key="frame" x="280" y="0.0" width="8" height="100"/>
@@ -70,9 +78,13 @@
                                             <constraint firstAttribute="height" constant="75" id="evN-QA-V9D"/>
                                             <constraint firstAttribute="width" constant="75" id="jyB-7R-brn"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="Button">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="btPopular3Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XBC-n3-zYr"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hga-d7-WWE">
                                         <rect key="frame" x="377" y="12" width="75" height="75"/>
@@ -81,9 +93,13 @@
                                             <constraint firstAttribute="width" constant="75" id="vAe-4P-9wP"/>
                                             <constraint firstAttribute="height" constant="75" id="wGa-z5-ypU"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="Button">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="btPopular4Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s4w-0d-DvX"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

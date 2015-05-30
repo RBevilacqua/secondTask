@@ -78,10 +78,13 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         btPopular1.layer.cornerRadius = 38
+        btPopular1.setTitle(pickerData[0]["name"] as? String, forState: .Normal)
         btPopular2.layer.cornerRadius = 38
+        btPopular2.setTitle(pickerData[1]["name"] as? String, forState: .Normal)
         btPopular3.layer.cornerRadius = 38
+        btPopular3.setTitle(pickerData[2]["name"] as? String, forState: .Normal)
         btPopular4.layer.cornerRadius = 38
-        
+        btPopular4.setTitle(pickerData[3]["name"] as? String, forState: .Normal)
       
         
     }
@@ -118,5 +121,29 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         }
     }
 
+    @IBAction func btPopular1Tapped(sender: UIButton) {
+        let response = findSubject(btPopular1.titleLabel!.text!)
+        if response[0] != -1 {
+            picker.selectRow(response[1], inComponent: 0, animated: true)
+        }
+    }
+    @IBAction func btPopular2Tapped(sender: UIButton) {
+        let response = findSubject(btPopular2.titleLabel!.text!)
+        if response[0] != -1 {
+            picker.selectRow(response[1], inComponent: 0, animated: true)
+        }
+    }
+    @IBAction func btPopular3Tapped(sender: UIButton) {
+        let response = findSubject(btPopular3.titleLabel!.text!)
+        if response[0] != -1 {
+            picker.selectRow(response[1], inComponent: 0, animated: true)
+        }
+    }
+    @IBAction func btPopular4Tapped(sender: UIButton) {
+        let response = findSubject(btPopular4.titleLabel!.text!)
+        if response[0] != -1 {
+            picker.selectRow(response[1], inComponent: 0, animated: true)
+        }
+    }
 }
 

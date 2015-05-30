@@ -407,6 +407,7 @@
 				9964C0BB1B183EFA00A87365 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9964C0BC1B183EFA00A87365 /* Build configuration list for PBXNativeTarget "secondtaskTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +416,7 @@
 				9964C0BE1B183EFA00A87365 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

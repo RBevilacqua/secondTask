@@ -18,6 +18,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     @IBOutlet weak var btPopular2: UIButton!
     @IBOutlet weak var btPopular3: UIButton!
     @IBOutlet weak var btPopular4: UIButton!
+    @IBOutlet weak var viewContent: UIView!
     
     @IBOutlet weak var navigation: UINavigationItem!
     
@@ -82,13 +83,15 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         picker.layer.masksToBounds = false
         picker.layer.shadowRadius = 1.0
         
-        btPopular1.layer.cornerRadius = 38
+        view.backgroundColor = UIColor(red: 0.918, green: 0.918, blue: 0.902, alpha: 1.0)
+        
+        btPopular1.layer.cornerRadius = 34
         btPopular1.setTitle(pickerData[0]["name"] as? String, forState: .Normal)
-        btPopular2.layer.cornerRadius = 38
+        btPopular2.layer.cornerRadius = 34
         btPopular2.setTitle(pickerData[1]["name"] as? String, forState: .Normal)
-        btPopular3.layer.cornerRadius = 38
+        btPopular3.layer.cornerRadius = 34
         btPopular3.setTitle(pickerData[2]["name"] as? String, forState: .Normal)
-        btPopular4.layer.cornerRadius = 38
+        btPopular4.layer.cornerRadius = 34
         btPopular4.setTitle(pickerData[3]["name"] as? String, forState: .Normal)
         
         tfSearch.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)

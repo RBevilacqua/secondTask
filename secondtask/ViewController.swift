@@ -64,7 +64,45 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        // Do any additional setup after loading the view, typically from a nib.
+        tfSearch.layer.shadowOpacity = 1.0
+        tfSearch.layer.shadowColor = UIColor.blackColor().CGColor
+        tfSearch.layer.shadowOffset = CGSizeMake(0.0,2.0)
+        tfSearch.layer.masksToBounds = false
+        tfSearch.layer.shadowRadius = 1.0
+        
+        btSearch.layer.shadowOpacity = 0.5
+        btSearch.layer.shadowColor = UIColor.blackColor().CGColor
+        btSearch.layer.shadowOffset = CGSizeMake(0.0,1.0)
+        btSearch.layer.masksToBounds = false
+        btSearch.layer.shadowRadius = 1.0
+        
+        picker.layer.shadowOpacity = 0.4
+        picker.layer.shadowColor = UIColor.blackColor().CGColor
+        picker.layer.shadowOffset = CGSizeMake(0.0,1.0)
+        picker.layer.masksToBounds = false
+        picker.layer.shadowRadius = 1.0
+        
+        btPopular1.layer.cornerRadius = 38
+        btPopular1.setTitle(pickerData[0]["name"] as? String, forState: .Normal)
+        btPopular2.layer.cornerRadius = 38
+        btPopular2.setTitle(pickerData[1]["name"] as? String, forState: .Normal)
+        btPopular3.layer.cornerRadius = 38
+        btPopular3.setTitle(pickerData[2]["name"] as? String, forState: .Normal)
+        btPopular4.layer.cornerRadius = 38
+        btPopular4.setTitle(pickerData[3]["name"] as? String, forState: .Normal)
+        
+        tfSearch.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        
+        var nav = self.navigationController?.navigationBar
+        nav?.tintColor = blueColor
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: blueColor]
+        
+        nav?.layer.shadowOpacity = 1.0
+        nav?.layer.shadowColor = UIColor.blackColor().CGColor
+        nav?.layer.shadowOffset = CGSizeMake(0.0,1.0)
+        nav?.layer.masksToBounds = false
+        nav?.layer.shadowRadius = 0
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,21 +119,6 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        btPopular1.layer.cornerRadius = 38
-        btPopular1.setTitle(pickerData[0]["name"] as? String, forState: .Normal)
-        btPopular2.layer.cornerRadius = 38
-        btPopular2.setTitle(pickerData[1]["name"] as? String, forState: .Normal)
-        btPopular3.layer.cornerRadius = 38
-        btPopular3.setTitle(pickerData[2]["name"] as? String, forState: .Normal)
-        btPopular4.layer.cornerRadius = 38
-        btPopular4.setTitle(pickerData[3]["name"] as? String, forState: .Normal)
-        
-        tfSearch.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
-
-        var nav = self.navigationController?.navigationBar
-        nav?.tintColor = blueColor
-        nav?.titleTextAttributes = [NSForegroundColorAttributeName: blueColor]
-
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

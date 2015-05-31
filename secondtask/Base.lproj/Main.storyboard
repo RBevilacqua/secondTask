@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="G7A-gy-C6t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="G7A-gy-C6t">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kcp-R6-6PI">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kcp-R6-6PI">
                                 <rect key="frame" x="16" y="142" width="512" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -232,8 +232,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="StudyPool" id="LPt-Rd-JFn">
-                        <barButtonItem key="leftBarButtonItem" systemItem="undo" id="VZo-Ut-CLI"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="p9A-l0-T0I"/>
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="VZo-Ut-CLI"/>
+                        <barButtonItem key="rightBarButtonItem" tag="1" title="Submit" id="p9A-l0-T0I"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btPopular1" destination="8sy-gV-UG8" id="SFt-fA-t3h"/>
@@ -241,6 +241,7 @@
                         <outlet property="btPopular3" destination="THp-Me-eMB" id="K5c-aG-MoL"/>
                         <outlet property="btPopular4" destination="hga-d7-WWE" id="pk8-kb-Dxa"/>
                         <outlet property="btSearch" destination="ZgX-Ha-GfD" id="BdR-d8-Sru"/>
+                        <outlet property="navigation" destination="LPt-Rd-JFn" id="TOq-U7-vhj"/>
                         <outlet property="picker" destination="kjY-JR-19P" id="iJx-Hs-xzp"/>
                         <outlet property="tfSearch" destination="Kcp-R6-6PI" id="3h9-4i-LTk"/>
                     </connections>

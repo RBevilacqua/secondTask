@@ -19,6 +19,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     @IBOutlet weak var btPopular3: UIButton!
     @IBOutlet weak var btPopular4: UIButton!
     
+    @IBOutlet weak var navigation: UINavigationItem!
     
     var pickerData : NSMutableArray = [
         ["id":1,"name":"Accounting"],
@@ -85,8 +86,12 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         btPopular3.setTitle(pickerData[2]["name"] as? String, forState: .Normal)
         btPopular4.layer.cornerRadius = 38
         btPopular4.setTitle(pickerData[3]["name"] as? String, forState: .Normal)
-      
         
+        tfSearch.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+
+      
+       // UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(netHex: 0x3AC1FF), NSFontAttributeName: UIFont()]
+       // navigation.titleView?.tintColor = UIColor.blackColor()
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -95,7 +100,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     
     //MARK: Delegates
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return pickerData[row]["name"] as! String
+        return pickerData[row]["name"] as String
     }
     
     //first index for ID, second for index of subject in array
@@ -103,8 +108,8 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         var response = [-1,-1]
         for index  in 0...pickerData.count-1{
             let subject: AnyObject = pickerData[index]
-            if (subject["name"] as! String).lowercaseString == subjectName.lowercaseString{
-                response = [subject["id"] as! Int,index]
+            if (subject["name"] as String).lowercaseString.contains(subjectName.lowercaseString) {
+                response = [subject["id"] as Int,index]
                 return response
             }
         }
@@ -115,35 +120,54 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         tfSearch.resignFirstResponder()
         self.view.endEditing(true)
         
-        let response = findSubject(tfSearch.text)
-        if response[0] != -1 {
-            picker.selectRow(response[1], inComponent: 0, animated: true)
-        }
+        changePickerRow(tfSearch.text)
     }
 
     @IBAction func btPopular1Tapped(sender: UIButton) {
-        let response = findSubject(btPopular1.titleLabel!.text!)
-        if response[0] != -1 {
-            picker.selectRow(response[1], inComponent: 0, animated: true)
-        }
+        changePickerRow(btPopular1.titleLabel!.text!)
     }
     @IBAction func btPopular2Tapped(sender: UIButton) {
-        let response = findSubject(btPopular2.titleLabel!.text!)
-        if response[0] != -1 {
-            picker.selectRow(response[1], inComponent: 0, animated: true)
-        }
+        changePickerRow(btPopular2.titleLabel!.text!)
     }
     @IBAction func btPopular3Tapped(sender: UIButton) {
-        let response = findSubject(btPopular3.titleLabel!.text!)
+        changePickerRow(btPopular3.titleLabel!.text!)
+    }
+    
+    @IBAction func btPopular4Tapped(sender: UIButton) {
+        changePickerRow(btPopular4.titleLabel!.text!)
+    }
+    
+    func textFieldDidChange(textField: UITextField) {
+        changePickerRow(tfSearch.text)
+    }
+    
+    func changePickerRow(subject: String){
+        let response = findSubject(subject)
         if response[0] != -1 {
             picker.selectRow(response[1], inComponent: 0, animated: true)
         }
     }
-    @IBAction func btPopular4Tapped(sender: UIButton) {
-        let response = findSubject(btPopular4.titleLabel!.text!)
-        if response[0] != -1 {
-            picker.selectRow(response[1], inComponent: 0, animated: true)
-        }
+    
+}
+
+extension String {
+    
+    func contains(find: String) -> Bool{
+        return self.rangeOfString(find) != nil
     }
 }
 
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(netHex:Int) {
+        self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+    }
+}

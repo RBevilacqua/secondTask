@@ -57,6 +57,9 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         ["id":33,"name":"Management"],
         ["id":34,"name":"SAT"]
     ]
+    
+    var buttonTapped : UIButton?
+    let blueColor = UIColor(netHex: 0x29C1F2)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,9 +92,10 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         
         tfSearch.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
 
-      
-       // UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(netHex: 0x3AC1FF), NSFontAttributeName: UIFont()]
-       // navigation.titleView?.tintColor = UIColor.blackColor()
+        var nav = self.navigationController?.navigationBar
+        nav?.tintColor = blueColor
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: blueColor]
+
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -125,26 +129,52 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
 
     @IBAction func btPopular1Tapped(sender: UIButton) {
         changePickerRow(btPopular1.titleLabel!.text!)
+        changeButtonTapped(sender)
     }
     @IBAction func btPopular2Tapped(sender: UIButton) {
         changePickerRow(btPopular2.titleLabel!.text!)
+        changeButtonTapped(sender)
     }
     @IBAction func btPopular3Tapped(sender: UIButton) {
         changePickerRow(btPopular3.titleLabel!.text!)
+        changeButtonTapped(sender)
     }
     
     @IBAction func btPopular4Tapped(sender: UIButton) {
         changePickerRow(btPopular4.titleLabel!.text!)
+        changeButtonTapped(sender)
     }
     
     func textFieldDidChange(textField: UITextField) {
         changePickerRow(tfSearch.text)
     }
     
+    func changeButtonTapped(button : UIButton){
+        buttonTapped?.layer.borderWidth = 0
+        buttonTapped?.layer.borderColor = nil
+        button.layer.borderWidth = 3
+        button.layer.borderColor = blueColor.CGColor
+        buttonTapped = button
+    }
+    
     func changePickerRow(subject: String){
         let response = findSubject(subject)
         if response[0] != -1 {
             picker.selectRow(response[1], inComponent: 0, animated: true)
+        }
+    }
+    
+    @IBAction func upSubjectTapped(sender: UIButton) {
+        let sel = picker.selectedRowInComponent(0)
+        if sel > 0{
+            picker.selectRow(sel - 1, inComponent: 0, animated: true)
+        }
+    }
+    
+    @IBAction func downSubjectTapped(sender: UIButton) {
+        let sel = picker.selectedRowInComponent(0)
+        if sel < picker.numberOfRowsInComponent(0){
+            picker.selectRow(sel + 1, inComponent: 0, animated: true)
         }
     }
     

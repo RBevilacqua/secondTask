@@ -127,7 +127,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     
     //MARK: Delegates
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return pickerData[row]["name"] as String
+        return pickerData[row]["name"] as! String
     }
     
     //first index for ID, second for index of subject in array
@@ -135,8 +135,8 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         var response = [-1,-1]
         for index  in 0...pickerData.count-1{
             let subject: AnyObject = pickerData[index]
-            if (subject["name"] as String).lowercaseString.contains(subjectName.lowercaseString) {
-                response = [subject["id"] as Int,index]
+            if (subject["name"]as! String).lowercaseString.contains(subjectName.lowercaseString) {
+                response = [subject["id"] as! Int,index]
                 return response
             }
         }

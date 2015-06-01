@@ -60,7 +60,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     ]
     
     var buttonTapped : UIButton?
-    let blueColor = UIColor(netHex: 0x29C1F2)
+    let blueColor = UIColor(netHex: 0x2ABFFF)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,11 +76,11 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         picker.layer.shadowOffset = CGSizeMake(0.0,1.0)
         picker.layer.masksToBounds = false
         picker.layer.shadowRadius = 1.0
-        
+        //picker.backgroundColor = UIColor(netHex: 0xE7E7E2)
             
         tfSearch.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
         
-        view.backgroundColor = UIColor(red: 0.918, green: 0.918, blue: 0.902, alpha: 1.0)
+        view.backgroundColor = UIColor(netHex: 0xBBBBBB)//UIColor(red: 0.918, green: 0.918, blue: 0.902, alpha: 1.0)
         
         btPopular1.layer.cornerRadius = 34
         btPopular1.setTitle(pickerData[0]["name"] as? String, forState: .Normal)
@@ -95,14 +95,13 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         
         var nav = self.navigationController?.navigationBar
         nav?.tintColor = blueColor
-        nav?.titleTextAttributes = [NSForegroundColorAttributeName: blueColor]
+        nav?.titleTextAttributes = [NSFontAttributeName : UIFont(name: "Armonioso", size: 20)!,NSForegroundColorAttributeName: blueColor]
         
         nav?.layer.shadowOpacity = 0.3
         nav?.layer.shadowColor = UIColor.blackColor().CGColor
         nav?.layer.shadowOffset = CGSizeMake(0.0,3.0)
         nav?.layer.masksToBounds = false
         nav?.layer.shadowRadius = 2.5
-
     }
 
     override func didReceiveMemoryWarning() {

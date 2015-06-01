@@ -65,23 +65,20 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        tfSearch.layer.shadowOpacity = 1.0
+        tfSearch.layer.shadowOpacity = 0.3
         tfSearch.layer.shadowColor = UIColor.blackColor().CGColor
-        tfSearch.layer.shadowOffset = CGSizeMake(0.0,2.0)
+        tfSearch.layer.shadowOffset = CGSizeMake(0.0,3.0)
         tfSearch.layer.masksToBounds = false
-        tfSearch.layer.shadowRadius = 1.0
-        
-        btSearch.layer.shadowOpacity = 0.5
-        btSearch.layer.shadowColor = UIColor.blackColor().CGColor
-        btSearch.layer.shadowOffset = CGSizeMake(0.0,1.0)
-        btSearch.layer.masksToBounds = false
-        btSearch.layer.shadowRadius = 1.0
+        tfSearch.layer.shadowRadius = 2.5
         
         picker.layer.shadowOpacity = 0.4
         picker.layer.shadowColor = UIColor.blackColor().CGColor
         picker.layer.shadowOffset = CGSizeMake(0.0,1.0)
         picker.layer.masksToBounds = false
         picker.layer.shadowRadius = 1.0
+        
+            
+        tfSearch.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
         
         view.backgroundColor = UIColor(red: 0.918, green: 0.918, blue: 0.902, alpha: 1.0)
         
@@ -100,11 +97,11 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         nav?.tintColor = blueColor
         nav?.titleTextAttributes = [NSForegroundColorAttributeName: blueColor]
         
-        nav?.layer.shadowOpacity = 1.0
+        nav?.layer.shadowOpacity = 0.3
         nav?.layer.shadowColor = UIColor.blackColor().CGColor
-        nav?.layer.shadowOffset = CGSizeMake(0.0,1.0)
+        nav?.layer.shadowOffset = CGSizeMake(0.0,3.0)
         nav?.layer.masksToBounds = false
-        nav?.layer.shadowRadius = 0
+        nav?.layer.shadowRadius = 2.5
 
     }
 

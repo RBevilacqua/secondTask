@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
 
+    //UI links
     @IBOutlet weak var tfSearch: UITextField!
     @IBOutlet weak var btSearch: UIButton!
     @IBOutlet weak var picker: UIPickerView!
@@ -22,6 +23,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     
     @IBOutlet weak var navigation: UINavigationItem!
     
+    //DATA
     var pickerData : NSMutableArray = [
         ["id":1,"name":"Accounting"],
         ["id":2,"name":"Art & Design"],
@@ -58,13 +60,14 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         ["id":33,"name":"Management"],
         ["id":34,"name":"SAT"]
     ]
-    
+    //to check if one Popular Button is tapped
     var buttonTapped : UIButton?
     let blueColor = UIColor(netHex: 0x2ABFFF)
 
     override func viewDidLoad() {
         super.viewDidLoad()
      
+        //SHADOWS
         tfSearch.layer.shadowOpacity = 0.3
         tfSearch.layer.shadowColor = UIColor.blackColor().CGColor
         tfSearch.layer.shadowOffset = CGSizeMake(0.0,3.0)
@@ -76,12 +79,12 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         picker.layer.shadowOffset = CGSizeMake(0.0,1.0)
         picker.layer.masksToBounds = false
         picker.layer.shadowRadius = 1.0
-        //picker.backgroundColor = UIColor(netHex: 0xE7E7E2)
             
         tfSearch.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
         
-        view.backgroundColor = UIColor(netHex: 0xBBBBBB)//UIColor(red: 0.918, green: 0.918, blue: 0.902, alpha: 1.0)
+        view.backgroundColor = UIColor(netHex: 0xBBBBBB)
         
+        //SET Popular Button Subject
         btPopular1.layer.cornerRadius = 34
         btPopular1.setTitle(pickerData[0]["name"] as? String, forState: .Normal)
         btPopular2.layer.cornerRadius = 34
@@ -93,10 +96,12 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         
         tfSearch.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         
+        //SET navigation bar color and Font
         var nav = self.navigationController?.navigationBar
         nav?.tintColor = blueColor
         nav?.titleTextAttributes = [NSFontAttributeName : UIFont(name: "Armonioso", size: 20)!,NSForegroundColorAttributeName: blueColor]
         
+        //SHADOW
         nav?.layer.shadowOpacity = 0.3
         nav?.layer.shadowColor = UIColor.blackColor().CGColor
         nav?.layer.shadowOffset = CGSizeMake(0.0,3.0)
@@ -130,6 +135,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     }
     
     //first index for ID, second for index of subject in array
+    //For every subject, it checks if subjectName is in
     func findSubject(subjectName : String) -> [Int]{
         var response = [-1,-1]
         for index  in 0...pickerData.count-1{
@@ -142,6 +148,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         return response
     }
   
+    //Search button Action
     @IBAction func searchButtonTapped(sender: UIButton) {
         tfSearch.resignFirstResponder()
         self.view.endEditing(true)
@@ -149,6 +156,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         changePickerRow(tfSearch.text)
     }
 
+    //ALL Popular Buttons Action
     @IBAction func btPopular1Tapped(sender: UIButton) {
         changePickerRow(btPopular1.titleLabel!.text!)
         changeButtonTapped(sender)
@@ -167,10 +175,12 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         changeButtonTapped(sender)
     }
     
+    //Check if TextField was changed, to searh every char typed
     func textFieldDidChange(textField: UITextField) {
         changePickerRow(tfSearch.text)
     }
     
+    //Change the button tapped, border OFF in previous button tapped, border ON in current Button tapped
     func changeButtonTapped(button : UIButton){
         buttonTapped?.layer.borderWidth = 0
         buttonTapped?.layer.borderColor = nil
@@ -179,6 +189,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         buttonTapped = button
     }
     
+    //change the selected row in Picker with one Subject if it is finded
     func changePickerRow(subject: String){
         let response = findSubject(subject)
         if response[0] != -1 {
@@ -186,22 +197,9 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         }
     }
     
-    @IBAction func upSubjectTapped(sender: UIButton) {
-        let sel = picker.selectedRowInComponent(0)
-        if sel > 0{
-            picker.selectRow(sel - 1, inComponent: 0, animated: true)
-        }
-    }
-    
-    @IBAction func downSubjectTapped(sender: UIButton) {
-        let sel = picker.selectedRowInComponent(0)
-        if sel < picker.numberOfRowsInComponent(0){
-            picker.selectRow(sel + 1, inComponent: 0, animated: true)
-        }
-    }
-    
 }
 
+//extension to check if Strings contains Another
 extension String {
     
     func contains(find: String) -> Bool{
@@ -209,7 +207,7 @@ extension String {
     }
 }
 
-
+//extensiono to make Color with Hexadecimal
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")

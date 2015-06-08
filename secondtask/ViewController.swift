@@ -66,9 +66,13 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     ]
     //to check if one Popular Button is tapped
     var buttonTapped : UIButton?
+    
+    
     let blueColor = UIColor(netHex: 0x2ABFFF)
     let greyColor = UIColor(netHex: 0xBBBBBB)
-
+    var selectedRowLabel : UILabel?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -112,6 +116,9 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         nav?.layer.shadowOffset = CGSizeMake(0.0,3.0)
         nav?.layer.masksToBounds = false
         nav?.layer.shadowRadius = 2.5
+        
+        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -128,21 +135,44 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        picker.selectRow(2, inComponent: 0, animated: true)
+        pickerView(picker, didSelectRow: 2, inComponent: 0)
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
     
-    //MARK: Delegates
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return pickerData[row]["name"] as String
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        println("anterior \(selectedRowLabel?.text)")
+        selectedRowLabel?.textColor = greyColor
+        
+        
+        let lb = picker.viewForRow(row, forComponent: component) as? UILabel
+        lb?.textColor = blueColor
+        
+        selectedRowLabel = lb
+        println("despues \(selectedRowLabel?.text)")
     }
     
-    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let attributedString = NSAttributedString(string: pickerData[row]["name"] as String, attributes: [NSForegroundColorAttributeName : greyColor])
-        return attributedString
-
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+        var pickerLabel = UILabel()
+        
+        if row == 0 {
+            println("anterior")
+            selectedRowLabel = pickerLabel
+            pickerLabel.textColor = blueColor
+            pickerLabel.textAlignment = NSTextAlignment.Left
+        }
+       /* else{*/
+            pickerLabel.textColor = greyColor
+            pickerLabel.textAlignment = NSTextAlignment.Center
+       // }
+        
+        pickerLabel.text = pickerData[row]["name"] as? String
+        
+        return pickerLabel
     }
 
     //first index for ID, second for index of subject in array
@@ -151,8 +181,8 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         var response = [-1,-1]
         for index  in 0...pickerData.count-1{
             let subject: AnyObject = pickerData[index]
-            if (subject["name"]as String).lowercaseString.contains(subjectName.lowercaseString) {
-                response = [subject["id"] as Int,index]
+            if (subject["name"] as! String).lowercaseString.contains(subjectName.lowercaseString) {
+                response = [subject["id"] as! Int,index]
                 return response
             }
         }
@@ -210,22 +240,25 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         let response = findSubject(subject)
         if response[0] != -1 {
             picker.selectRow(response[1], inComponent: 0, animated: true)
+            pickerView(picker, didSelectRow: response[1], inComponent: 0)
         }
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        let touch = touches.anyObject()! as UITouch
-        let location = touch.locationInView(view)
-        if buttonTapped != nil {
-            changeButtonInicialTapped(buttonTapped!)
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        for touch: AnyObject in touches {
+            let location = touch.locationInView(view)
+            if buttonTapped != nil {
+                changeButtonInicialTapped(buttonTapped!)
+            }
+            self.view.endEditing(true)
         }
-        self.view.endEditing(true)
     }
     
-    func textFieldShouldReturn(userText: UITextField!) -> Bool {
+    func textFieldShouldReturn(userText: UITextField) -> Bool {
         userText.resignFirstResponder()
         return true;
     }
+
     
 }
 

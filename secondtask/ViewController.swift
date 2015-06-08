@@ -142,6 +142,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let attributedString = NSAttributedString(string: pickerData[row]["name"] as String, attributes: [NSForegroundColorAttributeName : greyColor])
         return attributedString
+
     }
 
     //first index for ID, second for index of subject in array

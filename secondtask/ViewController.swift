@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
+class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate, UITextFieldDelegate {
 
     //UI links
     @IBOutlet weak var tfSearch: UITextField!
@@ -19,6 +19,10 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     @IBOutlet weak var btPopular2: UIButton!
     @IBOutlet weak var btPopular3: UIButton!
     @IBOutlet weak var btPopular4: UIButton!
+    var btPopular1Title: String!
+    var btPopular2Title: String!
+    var btPopular3Title: String!
+    var btPopular4Title: String!
     @IBOutlet weak var viewContent: UIView!
     
     @IBOutlet weak var navigation: UINavigationItem!
@@ -63,6 +67,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     //to check if one Popular Button is tapped
     var buttonTapped : UIButton?
     let blueColor = UIColor(netHex: 0x2ABFFF)
+    let greyColor = UIColor(netHex: 0xBBBBBB)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,17 +87,17 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
             
         tfSearch.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
         
-        view.backgroundColor = UIColor(netHex: 0xBBBBBB)
+        view.backgroundColor = UIColor(netHex: 0xF0F0ED)
         
         //SET Popular Button Subject
         btPopular1.layer.cornerRadius = 34
-        btPopular1.setTitle(pickerData[0]["name"] as? String, forState: .Normal)
+        btPopular1Title = pickerData[0]["name"] as? String
         btPopular2.layer.cornerRadius = 34
-        btPopular2.setTitle(pickerData[1]["name"] as? String, forState: .Normal)
+        btPopular2Title = pickerData[1]["name"] as? String
         btPopular3.layer.cornerRadius = 34
-        btPopular3.setTitle(pickerData[2]["name"] as? String, forState: .Normal)
+        btPopular3Title = pickerData[2]["name"] as? String
         btPopular4.layer.cornerRadius = 34
-        btPopular4.setTitle(pickerData[3]["name"] as? String, forState: .Normal)
+        btPopular4Title = pickerData[3]["name"] as? String
         
         tfSearch.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         
@@ -131,17 +136,22 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     
     //MARK: Delegates
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return pickerData[row]["name"] as! String
+        return pickerData[row]["name"] as String
     }
     
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let attributedString = NSAttributedString(string: pickerData[row]["name"] as String, attributes: [NSForegroundColorAttributeName : greyColor])
+        return attributedString
+    }
+
     //first index for ID, second for index of subject in array
     //For every subject, it checks if subjectName is in
     func findSubject(subjectName : String) -> [Int]{
         var response = [-1,-1]
         for index  in 0...pickerData.count-1{
             let subject: AnyObject = pickerData[index]
-            if (subject["name"]as! String).lowercaseString.contains(subjectName.lowercaseString) {
-                response = [subject["id"] as! Int,index]
+            if (subject["name"]as String).lowercaseString.contains(subjectName.lowercaseString) {
+                response = [subject["id"] as Int,index]
                 return response
             }
         }
@@ -158,20 +168,20 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
 
     //ALL Popular Buttons Action
     @IBAction func btPopular1Tapped(sender: UIButton) {
-        changePickerRow(btPopular1.titleLabel!.text!)
+        changePickerRow(btPopular1Title!)
         changeButtonTapped(sender)
     }
     @IBAction func btPopular2Tapped(sender: UIButton) {
-        changePickerRow(btPopular2.titleLabel!.text!)
+        changePickerRow(btPopular2Title!)
         changeButtonTapped(sender)
     }
     @IBAction func btPopular3Tapped(sender: UIButton) {
-        changePickerRow(btPopular3.titleLabel!.text!)
+        changePickerRow(btPopular3Title)
         changeButtonTapped(sender)
     }
     
     @IBAction func btPopular4Tapped(sender: UIButton) {
-        changePickerRow(btPopular4.titleLabel!.text!)
+        changePickerRow(btPopular4Title!)
         changeButtonTapped(sender)
     }
     
@@ -188,6 +198,11 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         button.layer.borderColor = blueColor.CGColor
         buttonTapped = button
     }
+    func changeButtonInicialTapped(button : UIButton){
+        buttonTapped?.layer.borderWidth = 0
+        buttonTapped?.layer.borderColor = nil
+        buttonTapped = button
+    }
     
     //change the selected row in Picker with one Subject if it is finded
     func changePickerRow(subject: String){
@@ -195,6 +210,20 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         if response[0] != -1 {
             picker.selectRow(response[1], inComponent: 0, animated: true)
         }
+    }
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        let touch = touches.anyObject()! as UITouch
+        let location = touch.locationInView(view)
+        if buttonTapped != nil {
+            changeButtonInicialTapped(buttonTapped!)
+        }
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(userText: UITextField!) -> Bool {
+        userText.resignFirstResponder()
+        return true;
     }
     
 }

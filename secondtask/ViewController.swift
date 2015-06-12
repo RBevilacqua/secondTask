@@ -136,8 +136,11 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        picker.selectRow(2, inComponent: 0, animated: true)
-        pickerView(picker, didSelectRow: 2, inComponent: 0)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        picker.selectRow(0, inComponent: 0, animated: true)
+        pickerView(picker, didSelectRow: 0, inComponent: 0)
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -145,33 +148,17 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        println("anterior \(selectedRowLabel?.text)")
-        selectedRowLabel?.textColor = greyColor
-        
-        
         let lb = picker.viewForRow(row, forComponent: component) as? UILabel
         lb?.textColor = blueColor
-        
         selectedRowLabel = lb
-        println("despues \(selectedRowLabel?.text)")
     }
+    
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
         var pickerLabel = UILabel()
-        
-        if row == 0 {
-            println("anterior")
-            selectedRowLabel = pickerLabel
-            pickerLabel.textColor = blueColor
-            pickerLabel.textAlignment = NSTextAlignment.Left
-        }
-       /* else{*/
-            pickerLabel.textColor = greyColor
-            pickerLabel.textAlignment = NSTextAlignment.Center
-       // }
-        
+        pickerLabel.textColor = greyColor
+        pickerLabel.textAlignment = NSTextAlignment.Center
         pickerLabel.text = pickerData[row]["name"] as? String
-        
         return pickerLabel
     }
 
@@ -229,6 +216,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         button.layer.borderColor = blueColor.CGColor
         buttonTapped = button
     }
+    
     func changeButtonInicialTapped(button : UIButton){
         buttonTapped?.layer.borderWidth = 0
         buttonTapped?.layer.borderColor = nil
@@ -240,16 +228,16 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         let response = findSubject(subject)
         if response[0] != -1 {
             picker.selectRow(response[1], inComponent: 0, animated: true)
-            pickerView(picker, didSelectRow: response[1], inComponent: 0)
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.pickerView(self.picker, didSelectRow: response[1], inComponent: 0)
+            }
         }
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInView(view)
-            if buttonTapped != nil {
-                changeButtonInicialTapped(buttonTapped!)
-            }
             self.view.endEditing(true)
         }
     }
